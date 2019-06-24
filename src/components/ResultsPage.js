@@ -1,61 +1,114 @@
-import React, { useEffect } from 'react'
-// import Result from './Result'
-import { useSelector, useDispatch } from 'react-redux'
-import { FETCH_RESULTS } from '../actions/index'
-import { Form, Button, Navbar, FormControl } from 'react-bootstrap'
+import React, { useState, useContext } from 'react'
+import { Form, Col, Button, Navbar } from 'react-bootstrap'
+import { StoreContext } from '../store'
+import { TM_URL, ITUNES_URL } from '../apiUrl'
 
-const NavBar = () => (
-  <Navbar bg='dark' variant='dark'>
-    <NavBar.Brand href='#home'>
-      <img alt='ConSearch Logo' src='' className='d-inline-block align-top' />
-      {' ConSearch '}
-    </NavBar.Brand>
-    <Form inline>
-      <FormControl
-        type='text'
-        placeholder='Search by city...'
-        className='mr-sm-2'
-      />
-      <Button variant='outline-info'>Search</Button>
+const ResultsBar = () => {
+  const [city, setCity] = useState('')
+  const [distance, setDistance] = useState('')
+  const [state, dispatch] = useContext(StoreContext)
+
+  const fetchResults = async (city, distance) => {
+    fetch(`${TM_URL}&city=${city}&distance=${distance}`)
+      .then(res => res.json())
+      .then(response => dispatch({type: 'FETCH_RESULTS', payload: response}))
+      .catch(err => console.error('ERROR:', err))
+  }
+
+  const onSubmit = e => {
+    e.preventDefault()
+    if (city.trim() === '') return;
+    let distNum = distance.substr(0, distance.length - 3)
+    fetchResults(city, distNum)
+    setCity('')
+    setDistance('Choose...')
+  }
+  
+  return(
+    <Navbar bg='dark' variant='dark'>
+      <Navbar.Brand href='/'>
+        <img alt='ConSearch Logo' src='google.com' className='d-inline-block align-top' />
+        {' ConSearch '}
+      </Navbar.Brand>
+      <Form onSubmit={onSubmit}>
+      <Form.Row>
+        <Col>
+          <Form.Control
+            placeholder='Enter your search...'
+            onChange={e => setCity(e.target.value)}
+            value={city}
+            name='city'
+          />
+        </Col>
+        <Col>
+          <Form.Label>Distance</Form.Label>
+          <Form.Control
+            as='select'
+            onChange={e => setDistance(e.target.value)}
+            value={distance}
+            name='distance'
+          >
+            <option>Choose...</option>
+            <option>10 mi</option>
+            <option>25 mi</option>
+            <option>50 mi</option>
+            <option>75 mi</option>
+            <option>100 mi</option>
+          </Form.Control>
+        </Col>
+        <Col>
+          <Button type='submit' variant='primary'>Search</Button>
+        </Col>
+      </Form.Row>
     </Form>
-  </Navbar>
-)
+    </Navbar>
+  )
+}
 
-const Result = props => (
+const Result = props => {
+  const hdPic = props.pics.filter(pic => pic.ratio === '4_3')[0].url
+  console.log(hdPic)
+  return (
   <div className='container'>
-    <img src={props.img} alt='artist'/>
+    <img src={hdPic} alt='artist' />
     <div className='content'>
       <div className='info'>
         <div className='date'>{props.date}</div>
-        <div className='artist'>{props.artist}</div>
-        <div className='venue'>{props.venue}</div>
+        <div className='artist'>{props.name}</div>
+        <div className='venue'>@ {props.venue}</div>
       </div>
       <div className='buttons'>
-        <Button variant='outline-primary'>Play Music</Button>
-        <Button variant='outline-primary'>Buy Tickets</Button>
+        <Button id={props.name}variant='outline-primary'>Play Music</Button>
+        <Button href={props.tmLink} variant='outline-primary'>Buy Tickets</Button>
       </div>
-      <div className='audio-player'>
+      {/* add audio player later */}
+      {/* <div className='audio-player'>
         <audio controls>
           <source src={props.song} type='audio/mpeg' />
         </audio>
-      </div>
+      </div> */}
     </div>
   </div>
-)
+  )
+}
 
 const ResultsPage = () => {
-  const results = useSelector(state => state.results)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch({ type: FETCH_RESULTS })
-  })
-
-  // const results = this.props.results.map((result, index) => {}
+  const [state, dispatch] = useContext(StoreContext)
 
   return (
     <div className='results-page'>
-      <NavBar />
-      {results}
+      <ResultsBar />
+      {state.results.map((result, index) => 
+      // console.log(result)
+        <Result 
+          key={index}
+          pics={result.images}
+          date={result.dates.start.localDate}
+          name={result.name}
+          venue={result._embedded.venues[0].name}
+          tmLink={result.url}
+        />
+      )}
     </div>
   )
 }
