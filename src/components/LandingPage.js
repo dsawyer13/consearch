@@ -25,7 +25,10 @@ export const SearchForm = withRouter(({ history }) => {
   const fetchResults = async (city, distance) => {
     fetch(`${TM_URL}&city=${city}&distance=${distance}`)
       .then(res => res.json())
-      .then(response => dispatch({type: 'FETCH_RESULTS', payload: response}))
+      .then(response => {
+        dispatch({type: 'FETCH_RESULTS', payload: response})
+        
+    })
       .catch(err => console.error('ERROR:', err))
   }
 
@@ -37,7 +40,7 @@ export const SearchForm = withRouter(({ history }) => {
     let distNum = distance.substr(0, distance.length - 3)
     fetchResults(city, distNum)
     setCity('')
-    setDistance('Choose...')
+    setDistance('Distance...')
     history.push('/results')
   }
 

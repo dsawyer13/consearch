@@ -11,7 +11,11 @@ const ResultsBar = () => {
   const fetchResults = async (city, distance) => {
     fetch(`${TM_URL}&city=${city}&distance=${distance}`)
       .then(res => res.json())
-      .then(response => dispatch({type: 'FETCH_RESULTS', payload: response}))
+      .then(response => {
+        dispatch({type: 'FETCH_RESULTS', payload: response})
+        dispatch({type: 'SET_CITY', payload: city})
+        dispatch({type: 'SET_DISTANCE', payload: distance})
+      })
       .catch(err => console.error('ERROR:', err))
   }
 
@@ -65,46 +69,73 @@ const ResultsBar = () => {
   )
 }
 
+
+
 const Result = props => {
+  const [audio, setAudio] = useState('')
+  const [error, setError] = useState('')
   const hdPic = props.pics.filter(pic => pic.ratio === '4_3')[0].url
-  console.log(hdPic)
+  const name = (props.rawName.attractions) ? props.rawName.attractions[0].name : ''
+
+  const fetchAudio = artist => {
+      const artistURI = encodeURIComponent(artist);
+      fetch(`${ITUNES_URL}${artistURI}`)
+        .then(res => res.json())
+        .then(response => {
+          if (response.results.length < 1) {
+            throw new Error('Invalid Artist')
+          }
+          setError('')
+          setAudio(
+            <audio controls='controls' src={response.results[0].previewUrl}></audio>
+          )
+        })
+        .catch(setError('Music Unavailable'))
+    }
+  
   return (
   <div className='container'>
     <img src={hdPic} alt='artist' />
     <div className='content'>
       <div className='info'>
         <div className='date'>{props.date}</div>
-        <div className='artist'>{props.name}</div>
+        <div className='artist'>{props.title}</div>
         <div className='venue'>@ {props.venue}</div>
       </div>
       <div className='buttons'>
-        <Button id={props.name}variant='outline-primary'>Play Music</Button>
+        <Button variant='outline-primary' onClick={() => {fetchAudio(name)}}>Play Music</Button>
         <Button href={props.tmLink} variant='outline-primary'>Buy Tickets</Button>
+      </div> 
+      <div className='audio-player'>
+        {audio}
       </div>
-      {/* add audio player later */}
-      {/* <div className='audio-player'>
-        <audio controls>
-          <source src={props.song} type='audio/mpeg' />
-        </audio>
-      </div> */}
+      <div className='error'>{error}</div>
     </div>
   </div>
   )
 }
 
-const ResultsPage = () => {
+const Pagination = () => {
   const [state, dispatch] = useContext(StoreContext)
 
+}
+
+const ResultsPage = () => {
+  const [state, dispatch] = useContext(StoreContext)
+  
   return (
     <div className='results-page'>
       <ResultsBar />
       {state.results.map((result, index) => 
       // console.log(result)
         <Result 
+          rawName={result._embedded}
           key={index}
+          // artist={result._embedded.attractions[0].name ? result._embedded.attractions[0].name : 'undefined'}
+          // figure out how to get the artist name as a tag in the audio button even if the name is undefined
           pics={result.images}
           date={result.dates.start.localDate}
-          name={result.name}
+          title={result.name}
           venue={result._embedded.venues[0].name}
           tmLink={result.url}
         />

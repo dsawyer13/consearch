@@ -4,18 +4,16 @@ export const StoreContext = createContext({});
 
 const initialState = {
     results: [],
-    audio: '',
-    city: '',
-    distance: null
+    page: ''
 }
 
 function reducer(state, action) {
 
     switch (action.type) {
         case 'FETCH_RESULTS':
-            return (state, {results: action.payload._embedded.events})
-        case 'FETCH_AUDIO':
-            return Object.assign(state, { audio: action.data })
+            return {...state, results: action.payload._embedded.events}
+        case 'SET_PAGE':
+            return {...state, page: action.payload}
         default: 
             throw new Error('Action type must be defined')
     }
