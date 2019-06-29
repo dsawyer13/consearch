@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Form, Col, Button, Navbar } from 'react-bootstrap'
 import { StoreContext } from '../store'
 import { TM_URL, ITUNES_URL } from '../apiUrl'
@@ -8,13 +8,14 @@ const ResultsBar = () => {
   const [distance, setDistance] = useState('')
   const [state, dispatch] = useContext(StoreContext)
 
-  const fetchResults = async (city, distance) => {
+  const fetchResults = (city, distance) => {
     fetch(`${TM_URL}&city=${city}&distance=${distance}`)
       .then(res => res.json())
       .then(response => {
         dispatch({type: 'FETCH_RESULTS', payload: response})
         dispatch({type: 'SET_CITY', payload: city})
         dispatch({type: 'SET_DISTANCE', payload: distance})
+        dispatch({type: 'SET_PAGE'})
       })
       .catch(err => console.error('ERROR:', err))
   }
@@ -24,8 +25,8 @@ const ResultsBar = () => {
     if (city.trim() === '') return;
     let distNum = distance.substr(0, distance.length - 3)
     fetchResults(city, distNum)
-    setCity('')
-    setDistance('Choose...')
+    // setCity('')
+    // setDistance('Choose...')
   }
   
   return(
@@ -117,22 +118,53 @@ const Result = props => {
 
 const Pagination = () => {
   const [state, dispatch] = useContext(StoreContext)
+  const currentPage = state.page
+  
+  const lastPage = () => {
+    fetch(`${TM_URL}&city=${state.city}&distance=${state.distance}&page=${currentPage - 1}`)
+    .then(res => res.json())
+    .then(response => {
+      dispatch({type: 'FETCH_RESULTS', payload: response})
+      dispatch({type: 'LAST_PAGE', payload: currentPage-1})
+    })
+    .catch(err => console.error('ERROR:', err.message))
+  }
 
+  const nextPage = () => {
+    fetch(`${TM_URL}&city=${state.city}&distance=${state.distance}&page=${currentPage + 1}`)
+      .then(res => res.json())
+      .then(response => {
+        dispatch({type: 'FETCH_RESULTS', payload: response})
+        dispatch({type: 'NEXT_PAGE', payload: currentPage+1})
+      })
+      .catch(err => console.error('ERROR:', err.message))
+  }
+
+  const lastButton = (currentPage === 1) ? '' : <Button variant='outline-primary' onClick={lastPage}>Last Page</Button>
+  const nextButton = (currentPage <= state.lastPage) ? <Button variant='outline-primary' onClick={nextPage}>NextPage</Button> : ''
+
+  return (
+    <div className="button-container">
+      {lastButton}
+      {nextButton}
+    </div>
+  )
 }
 
 const ResultsPage = () => {
   const [state, dispatch] = useContext(StoreContext)
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  })
   
   return (
     <div className='results-page'>
       <ResultsBar />
       {state.results.map((result, index) => 
-      // console.log(result)
         <Result 
           rawName={result._embedded}
           key={index}
-          // artist={result._embedded.attractions[0].name ? result._embedded.attractions[0].name : 'undefined'}
-          // figure out how to get the artist name as a tag in the audio button even if the name is undefined
           pics={result.images}
           date={result.dates.start.localDate}
           title={result.name}
@@ -140,6 +172,7 @@ const ResultsPage = () => {
           tmLink={result.url}
         />
       )}
+      <Pagination />
     </div>
   )
 }
