@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, useEffect } from 'react'
 
 export const StoreContext = createContext({});
 
@@ -9,6 +9,8 @@ const initialState = {
     city: '',
     distance: ''
 }
+
+const localState = JSON.parse(localStorage.getItem('state'))
 
 function reducer(state, action) {
 
@@ -33,7 +35,11 @@ function reducer(state, action) {
 }
 
 const Store = ({ children }) => {
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, localState || initialState)
+
+    useEffect(() => {
+        localStorage.setItem('state', JSON.stringify(state))
+    }, [state])
 
     return (
         <StoreContext.Provider value={[state, dispatch]}>
