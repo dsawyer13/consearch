@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:300|Poppins:400,600,700&display=swap");
+.logo {
+  background: -webkit-linear-gradient(90deg, #FF8007 0%, #FF4D08 104.44%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; }
+
+*, html {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.logo {
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 1rem; }
+  @media (max-width: 1200px) {
+    .logo {
+      font-size: calc(1.325rem + 0.9vw) ; } }
+
+.landing-body {
+  width: 100vw;
+  height: 100vh;
+  padding-left: 6rem;
+  background: #FFFFFF;
+  background: url(../LandingPage.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  font-family: Poppins;
+  font-style: normal; }
+
+.logo {
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  padding-top: 1rem; }
+  @media (max-width: 1200px) {
+    .logo {
+      font-size: calc(1.325rem + 0.9vw) ; } }
+
+.landing-content {
+  margin-top: 10rem; }
+  .landing-content h1 {
+    position: relative;
+    font-weight: 600;
+    font-size: 4.5rem;
+    color: #070D58; }
+    @media (max-width: 1200px) {
+      .landing-content h1 {
+        font-size: calc(1.575rem + 3.9vw) ; } }
+  .landing-content p {
+    position: relative;
+    font-family: Lato;
+    font-size: 1.8rem;
+    width: 42%;
+    margin-top: 1rem;
+    line-height: 3rem;
+    color: #2B2B2B; }
+    @media (max-width: 1200px) {
+      .landing-content p {
+        font-size: calc(1.305rem + 0.66vw) ; } }
+
+.search-form {
+  display: relative;
+  margin-top: 5rem; }
+
+.input {
+  width: 300px;
+  height: 50px;
+  display: inline;
+  padding-left: 5px;
+  margin-right: 1rem; }
+
+.dist-input {
+  width: 100px; }
+
+.btn-primary {
+  background-color: #070D58;
+  border-color: #070D58;
+  height: 50px;
+  width: 125px;
+  font-size: 22px;
+  font-weight: bold; }
+
+.btn-primary:hover {
+  background-color: #020851;
+  border-color: #020851; }

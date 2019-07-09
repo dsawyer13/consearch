@@ -1,0 +1,77 @@
+@import 'bourbon';
+@import 'neat';
+@import url('https://fonts.googleapis.com/css?family=Lato:300|Poppins:400,600,700&display=swap');
+@import '../../../../node_modules/rfs/scss';
+@import './common.scss';
+
+.landing-body {
+    width: 100vw;
+    height: 100vh;
+    padding-left: 6rem;
+    background: #FFFFFF;
+    background: url(../LandingPage.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    font-family: Poppins;
+    font-style: normal; 
+}
+
+
+.logo {
+    @extend %ojGradient;
+    position: relative;
+    @include font-size(2rem);
+    font-weight: bold;
+    padding-top: 1rem;
+}
+
+.landing-content {
+    margin-top: 10rem;
+    h1 {
+        position: relative;
+        font-weight: 600;
+        @include font-size(4.5rem);
+        color: #070D58;
+    }
+    p {
+        position: relative;
+        font-family: Lato;
+        @include font-size(1.8rem);
+        width: 42%;
+        margin-top: 1rem;
+        line-height: 3rem;
+        color: #2B2B2B;
+    }
+}
+
+.search-form {
+    display: relative;
+    margin-top: 5rem;
+}
+
+.input {
+    width: 300px;
+    height: 50px;
+    display: inline;
+    padding-left: 5px;
+    margin-right: 1rem;
+}
+
+.dist-input {
+    width: 100px;
+}
+
+.btn-primary {
+    background-color: #070D58;
+    border-color: #070D58;
+    height: 50px;
+    width: 125px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #020851;
+    border-color: #020851;
+}

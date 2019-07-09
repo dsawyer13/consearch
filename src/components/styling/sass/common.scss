@@ -1,0 +1,24 @@
+@import '../../../../node_modules/rfs/scss';
+
+%ojGradient {
+    background: -webkit-linear-gradient(90deg, #FF8007 0%, #FF4D08 104.44%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+*, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.logo {
+    @extend %ojGradient;
+    position: relative;
+    @include font-size(2rem);
+    font-weight: bold;
+    padding-top: 1rem;
+}
