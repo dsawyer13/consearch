@@ -1,65 +1,72 @@
 @import 'bourbon';
-@import 'neat';
-@import url('https://fonts.googleapis.com/css?family=Lato:300|Poppins:400,600,700&display=swap');
-@import '../../../../node_modules/rfs/scss';
+@import url('https://fonts.googleapis.com/css?family=Lato:300|Poppins:400,500,600,700&display=swap');
 @import './common.scss';
 
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.landing-logo {
+    display: inline-block;
+    padding-top: .6rem;
+    padding-left: .6rem;
+}
+
 .landing-body {
-    width: 100vw;
-    height: 100vh;
+    background-color: transparent;
     padding-left: 6rem;
-    background: #FFFFFF;
-    background: url(../LandingPage.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
     font-family: Poppins;
     font-style: normal; 
 }
 
-
-.logo {
-    @extend %ojGradient;
-    position: relative;
-    @include font-size(2rem);
-    font-weight: bold;
-    padding-top: 1rem;
-}
-
 .landing-content {
-    margin-top: 10rem;
+    margin-top: 10%;
+    width: 45%;
     h1 {
         position: relative;
         font-weight: 600;
-        @include font-size(4.5rem);
+        font-size: calc(1em + 2vw);
         color: #070D58;
     }
     p {
+        width: 80%;
         position: relative;
         font-family: Lato;
-        @include font-size(1.8rem);
-        width: 42%;
+        font-size: calc(.5em + 1vw);
         margin-top: 1rem;
         line-height: 3rem;
         color: #2B2B2B;
     }
 }
 
-.search-form {
-    display: relative;
-    margin-top: 5rem;
+.bgImage {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    width: auto;
+    margin-right: -70px;
+    z-index: -1;
 }
 
-.input {
-    width: 300px;
-    height: 50px;
+.search-form {
+    display: relative;
+    margin-top: calc(2em + 2vw);
+}
+
+.city-input,
+.dist-input {
+    width: calc(1em + 15vw);
+    height: calc(1em + 2vw);
     display: inline;
     padding-left: 5px;
     margin-right: 1rem;
 }
 
 .dist-input {
-    width: 100px;
+    width: 8vw;
 }
 
 .btn-primary {
@@ -75,3 +82,70 @@
     background-color: #020851;
     border-color: #020851;
 }
+
+
+.search-form >.landing-btn {
+    height: calc(1em + 1.5vw);
+    font-size: calc(.4em + 1vw)
+}
+
+
+// @media (max-width:1580px) {
+//     .landing-content {
+//         margin-top: 8%;
+//         h1 {
+//             font-size: 4rem;
+//         }
+//         p {
+//             font-size: 1.4rem;
+//         }
+//     }
+// }
+
+// @media (max-width:1460px) {
+//     .landing-content {
+//         h1 {
+//             font-size: 3.5rem;
+//         }
+//         p {
+//             font-size: 1.2rem;
+//         }
+//     }
+// }
+
+// @media (max-width:1390px) {
+//     .landing-body {
+//         padding-left: 3.5rem;
+//     }
+//     .landing-content {
+//         margin-top: 8%;
+//         h1 {
+//             font-size: 3.2rem;
+//         }
+//     }
+// }
+
+// @media (max-width: 1300px) {
+//     // .landing-body {
+//     //     padding-left: 2rem;
+    
+//     // }
+//     // .landing-content {
+//     //     margin-top: 8%;
+//     //         h1 {
+//     //             font-size: 2.5rem;
+//     //         }
+//     // }   
+//     .input {
+//         width: 200px;
+//         height: 50px;
+//         display: inline;
+//         padding-left: 5px;
+//         margin-right: 1rem;
+//     }
+
+//     .dist-input {
+//         width: 90px;
+//     }
+// }
+

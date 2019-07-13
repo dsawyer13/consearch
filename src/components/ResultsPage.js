@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { StoreContext } from '../store'
 import { TM_URL, ITUNES_URL } from '../apiUrl'
+import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import './styling/css/results.css'
 import './styling/css/common.css'
+import './styling/css/grid.css'
 
 const ResultsBar = () => {
   const [city, setCity] = useState('')
@@ -31,7 +33,9 @@ const ResultsBar = () => {
 
   return (
     <nav>
-      <div className='logo nav-logo'>ConSearch</div>
+      <div className='logo nav-logo'>
+      <Link to='/'> ConSearch</Link>
+      </div>
       <Form className='nav-form' onSubmit={onSubmit}>
         <Form.Control
          className='city-input input'
@@ -68,6 +72,17 @@ const Result = props => {
   const name = props.rawName.attractions
     ? props.rawName.attractions[0].name
     : ''
+  const date = new Date(props.date)
+  const year = date.getFullYear()
+  let month = date.getMonth()+1
+  let dt = date.getDate();
+  if (dt < 10) {
+    dt = '0' + dt
+  }
+  if (month < 10) {
+    month = '0' + month
+  }
+  const newDate = month+'/'+dt+'/'+year
 
   const fetchAudio = artist => {
     const artistURI = encodeURIComponent(artist)
@@ -90,13 +105,15 @@ const Result = props => {
       <div className='photo'>
        <img src={hdPic} alt='artist' />
       </div>
-      <div className='content'>
         <div className='info'>
-          <div className='date'>{props.date}</div>
+          <div className='date'>{newDate}</div>
           <div className='artist'>{props.title}</div>
           <div className='venue'>@ {props.venue}</div>
+          <div className='audio-player'>{audio}</div>
+          <div className='error'>{error}</div>
         </div>
         <div className='buttons'>
+          <Button className='ticket-button' variant='danger' target='_blank' href={props.tmLink}>TICKETS</Button>
           <Button
             className='play-button'
             variant='warning'
@@ -104,14 +121,10 @@ const Result = props => {
               fetchAudio(name)
             }}
           >
-            Play
+            PLAY
           </Button>
-          <Button className='ticket-button' variant='danger' href={props.tmLink}>Tickets</Button>
         </div>
-        <div className='audio-player'>{audio}</div>
-        <div className='error'>{error}</div>
       </div>
-    </div>
   )
 }
 
@@ -148,10 +161,10 @@ const Pagination = () => {
   }
 
   const lastButton =
-    currentPage === 1 ? '' : <button onClick={lastPage}>Last Page</button>
+    currentPage === 1 ? '' : <Button className='last' onClick={lastPage}>Last</Button>
   const nextButton =
     currentPage <= state.lastPage ? (
-      <button onClick={nextPage}>NextPage</button>
+      <Button className='next' onClick={nextPage}>Next</Button>
     ) : (
       ''
     )

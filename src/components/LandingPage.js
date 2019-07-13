@@ -5,10 +5,11 @@ import { Form, Button } from 'react-bootstrap'
 import { TM_URL } from '../apiUrl'
 import './styling/css/landing.css'
 import './styling/css/common.css'
+import Concert from './styling/Concert.png'
 
 const LandingNavBar = () => (
   // make a link
-  <div className='logo'>ConSearch</div>
+  <div className='logo landing-logo'>ConSearch</div>
 )
 
 export const SearchForm = withRouter(({ history }) => {
@@ -71,7 +72,7 @@ export const SearchForm = withRouter(({ history }) => {
         <option>100 mi</option>
       </Form.Control>
 
-      <Button type='submit'>Search</Button>
+      <Button className='landing-btn' type='submit'>Search</Button>
     </Form>
   )
 })
@@ -83,11 +84,12 @@ const LandingPage = () => (
       <h1>Find Local Music</h1>
       <h1>Wherever You Are</h1>
       <p>
-        ConSearch lets you search for upcoming music events and lets you listen
+        ConSearch helps you search for upcoming music events and lets you listen
         to what will be playing at the event.
       </p>
+      <SearchForm />
     </div>
-    <SearchForm />
+    <img className='bgImage' alt='background' src={Concert} />
   </body>
 )
 

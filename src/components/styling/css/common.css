@@ -11,10 +11,5 @@
   box-sizing: border-box; }
 
 .logo {
-  position: relative;
   font-size: 2rem;
-  font-weight: bold;
-  padding-top: 1rem; }
-  @media (max-width: 1200px) {
-    .logo {
-      font-size: calc(1.325rem + 0.9vw) ; } }
+  font-weight: bold; }
