@@ -6,6 +6,11 @@ import { TM_URL } from '../apiUrl'
 import './styling/css/landing.css'
 import './styling/css/common.css'
 import Concert from './styling/Concert.png'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faMusic, faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faSearch, faMusic, faTicketAlt)
 
 const LandingNavBar = () => (
   // make a link
@@ -72,7 +77,7 @@ export const SearchForm = withRouter(({ history }) => {
         <option>100 mi</option>
       </Form.Control>
 
-      <Button className='landing-btn' type='submit'>Search</Button>
+      <Button className='landing-btn' type='submit'><FontAwesomeIcon icon='search' size='sm' /><span className='hidden-text'>Search</span></Button>
     </Form>
   )
 })

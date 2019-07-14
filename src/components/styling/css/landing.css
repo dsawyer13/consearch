@@ -17,8 +17,7 @@
 
 html, body {
   margin: 0;
-  height: 100%;
-  overflow: hidden; }
+  height: 100%; }
 
 .landing-logo {
   display: inline-block;
@@ -29,7 +28,8 @@ html, body {
   background-color: transparent;
   padding-left: 6rem;
   font-family: Poppins;
-  font-style: normal; }
+  font-style: normal;
+  overflow: hidden; }
 
 .landing-content {
   margin-top: 10%;
@@ -52,6 +52,7 @@ html, body {
   position: absolute;
   right: 0;
   top: 0;
+  bottom: 0;
   height: 100vh;
   width: auto;
   margin-right: -70px;
@@ -87,3 +88,82 @@ html, body {
 .search-form > .landing-btn {
   height: calc(1em + 1.5vw);
   font-size: calc(.4em + 1vw); }
+
+@media (max-width: 1030px) {
+  .landing-body {
+    position: fixed;
+    padding: 0; }
+  .landing-content {
+    padding: 20% 0;
+    width: 80%;
+    margin: 0 auto; }
+    .landing-content h1, .landing-content p {
+      color: white; }
+    .landing-content h1 {
+      font-size: 64px;
+      text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.6), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1); }
+    .landing-content p {
+      text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.6), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+      font-size: 28px;
+      margin: 0; }
+  .landing-logo {
+    margin-left: 10%; }
+  .search-form {
+    margin-top: 120px; }
+  .dist-input,
+  .city-input {
+    height: 50px;
+    font-size: 20px;
+    float: left; }
+  .dist-input {
+    width: 110px; }
+  .city-input {
+    width: 250px; }
+  .search-form > .landing-btn {
+    height: 50px;
+    font-size: 20px;
+    background-color: #FF6807;
+    border-color: #FF6807; } }
+
+@media (max-width: 500px) {
+  .landing-body {
+    padding-left: 0;
+    text-align: center;
+    line-height: 3em;
+    overflow: hidden;
+    position: fixed; }
+  .landing-logo {
+    margin-left: 0;
+    padding: 0;
+    padding-top: 5px; }
+  .landing-content {
+    margin: 0 auto;
+    width: 90%;
+    padding-top: 7%; }
+    .landing-content h1 {
+      font-size: 48px;
+      color: white; }
+    .landing-content p {
+      margin: 0 auto;
+      font-size: 1.2rem;
+      color: white;
+      width: 90%; }
+    .landing-content .city-input,
+    .landing-content .dist-input,
+    .landing-content .landing-btn {
+      height: auto;
+      float: left;
+      font-size: 16px; }
+    .landing-content .city-input {
+      width: 130px; }
+    .landing-content .dist-input {
+      width: 80px; }
+    .landing-content .search-form {
+      margin-top: 50px; }
+    .landing-content .search-form > .landing-btn,
+    .landing-content .btn-primary {
+      font-size: 16px;
+      width: 115px;
+      height: 40px;
+      background-color: #FF6807;
+      border-color: #FF6807; } }
