@@ -77,7 +77,7 @@ export const SearchForm = withRouter(({ history }) => {
         <option>100 mi</option>
       </Form.Control>
 
-      <Button className='landing-btn' type='submit'><FontAwesomeIcon icon='search' size='sm' /><span className='hidden-text'>Search</span></Button>
+      <Button className='landing-btn' type='submit'><FontAwesomeIcon icon='search' size='sm' /> Search</Button>
     </Form>
   )
 })

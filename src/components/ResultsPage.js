@@ -7,6 +7,8 @@ import './styling/css/results.css'
 import './styling/css/common.css'
 import './styling/css/grid.css'
 
+
+//nav bar with included search form
 const ResultsBar = () => {
   const [city, setCity] = useState('')
   const [distance, setDistance] = useState('')
@@ -24,6 +26,7 @@ const ResultsBar = () => {
       .catch(err => console.error('ERROR:', err))
   }
 
+  //grab value from distance input and trim 'mi'
   const onSubmit = e => {
     e.preventDefault()
     if (city.trim() === '') return
@@ -68,10 +71,16 @@ const ResultsBar = () => {
 const Result = props => {
   const [audio, setAudio] = useState('')
   const [error, setError] = useState('')
+
+  //grab pic with same ratio for each artist, because list of pics isn't ordered
   const hdPic = props.pics.filter(pic => pic.ratio === '4_3')[0].url
+  
+  //conditional rendering based on if json object has a particular property
   const name = props.rawName.attractions
     ? props.rawName.attractions[0].name
     : ''
+
+  //format date
   const date = new Date(props.date)
   const year = date.getFullYear()
   let month = date.getMonth()+1
@@ -84,6 +93,9 @@ const Result = props => {
   }
   const newDate = month+'/'+dt+'/'+year
 
+//  Search for artist on iTunes API
+//  if the artist exists, add a music sample,
+//  else display error message
   const fetchAudio = artist => {
     const artistURI = encodeURIComponent(artist)
     fetch(`${ITUNES_URL}${artistURI}`)
@@ -128,6 +140,10 @@ const Result = props => {
   )
 }
 
+
+//Handcoded pagination, after clicking next or last,
+//the page value is updated in store,
+//and new request is sent to TicketMasterAPI
 const Pagination = () => {
   const [state, dispatch] = useContext(StoreContext)
   const currentPage = state.page
@@ -145,7 +161,7 @@ const Pagination = () => {
       })
       .catch(err => console.error('ERROR:', err.message))
   }
-
+  //If this is the last page of results, don't render the button
   const nextPage = () => {
     fetch(
       `${TM_URL}&city=${state.city}&distance=${
@@ -159,7 +175,7 @@ const Pagination = () => {
       })
       .catch(err => console.error('ERROR:', err.message))
   }
-
+  //If this is the first page, don't render
   const lastButton =
     currentPage === 1 ? '' : <Button className='last' onClick={lastPage}>Last</Button>
   const nextButton =
@@ -180,6 +196,8 @@ const Pagination = () => {
 const ResultsPage = () => {
   const [state, dispatch] = useContext(StoreContext)
 
+  //After hitting next or last page, page rerenders,
+  //and triggers useEffect to Scroll to top again
   useEffect(() => {
     window.scrollTo(0, 0)
   })
