@@ -37,9 +37,6 @@
   },
   "main": "index.js",
   "license": "MIT",
-  "devDependencies": {
-    "eyeglass": "^2.4.1",
-    "scut": "^1.4.0",
-    "sierra-library": "^3.5.0"
-  }
+  "devDependencies": {},
+  "homepage": "https://dsawyer13.github.io/consearch/"
 }
