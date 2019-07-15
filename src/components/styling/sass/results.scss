@@ -33,7 +33,7 @@ nav {
 //Results styles
 .results-body {
     height: 100%;
-    overflow: visible;
+    overflow: visible !important;
     background: rgb(22,18,57);
     background: linear-gradient(180deg, rgba(22,18,57,1) 0%, rgba(86,108,167,1) 73%, rgba(89,115,184,1) 100%);    
     background-size: cover;
