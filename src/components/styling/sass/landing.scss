@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300|Poppins:400,500,600,700&display=swap');
 @import './common.scss';
 
-html, body {
+html {
     margin: 0;
     height: 100%;
 }
@@ -14,11 +14,11 @@ html, body {
 }
 
 .landing-body {
+    overflow: hidden !important;
     background-color: transparent;
     padding-left: 6rem;
     font-family: Poppins;
     font-style: normal; 
-    overflow: hidden;
 }
 
 .landing-content {
@@ -42,14 +42,18 @@ html, body {
 }
 
 .bgImage {
+    overflow: hidden;
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
     height: 100vh;
-    width: auto;
-    margin-right: -70px;
     z-index: -1;
+}
+
+.imgContainer {
+    overflow: hidden !important;
+    max-width: 100% !important;
 }
 
 .search-form {

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import './styling/css/results.css'
 import './styling/css/common.css'
-import './styling/css/grid.css'
 
 
 //nav bar with included search form
@@ -203,7 +202,7 @@ const ResultsPage = () => {
   })
 
   return (
-    <body className='results-body'>
+    <div className='results-body'>
         <ResultsBar />
           <section className='results'>
           {state.results.map((result, index) => (
@@ -219,7 +218,7 @@ const ResultsPage = () => {
             ))}
             <Pagination />
             </section>
-      </body>
+      </div>
   )
 }
 

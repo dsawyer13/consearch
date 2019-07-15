@@ -15,7 +15,7 @@
   font-size: 2rem;
   font-weight: bold; }
 
-html, body {
+html {
   margin: 0;
   height: 100%; }
 
@@ -25,11 +25,11 @@ html, body {
   padding-left: .6rem; }
 
 .landing-body {
+  overflow: hidden !important;
   background-color: transparent;
   padding-left: 6rem;
   font-family: Poppins;
-  font-style: normal;
-  overflow: hidden; }
+  font-style: normal; }
 
 .landing-content {
   margin-top: 10%;
@@ -49,14 +49,17 @@ html, body {
     color: #2B2B2B; }
 
 .bgImage {
+  overflow: hidden;
   position: absolute;
   right: 0;
   top: 0;
   bottom: 0;
   height: 100vh;
-  width: auto;
-  margin-right: -70px;
   z-index: -1; }
+
+.imgContainer {
+  overflow: hidden !important;
+  max-width: 100% !important; }
 
 .search-form {
   display: relative;

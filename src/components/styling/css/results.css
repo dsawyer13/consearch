@@ -40,6 +40,7 @@ nav {
 
 .results-body {
   height: 100%;
+  overflow: visible;
   background: #161239;
   background: -webkit-gradient(linear, left top, left bottom, from(#161239), color-stop(73%, #566ca7), to(#5973b8));
   background: -webkit-linear-gradient(top, #161239 0%, #566ca7 73%, #5973b8 100%);
@@ -86,9 +87,13 @@ nav {
     font-size: 1.5rem;
     max-width: 700px; }
 
-.photo img {
-  width: 225px;
-  max-width: 100%; }
+.photo {
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  align-self: center; }
+  .photo img {
+    width: 225px;
+    max-width: 100%; }
 
 .button-container {
   margin: 0 auto;

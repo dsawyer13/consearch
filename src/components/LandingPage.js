@@ -8,9 +8,9 @@ import './styling/css/common.css'
 import Concert from './styling/Concert.png'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faMusic, faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faSearch, faMusic, faTicketAlt)
+library.add(faSearch)
 
 const LandingNavBar = () => (
   // make a link
@@ -83,7 +83,7 @@ export const SearchForm = withRouter(({ history }) => {
 })
 
 const LandingPage = () => (
-  <body className='landing-body'>
+  <div className='landing-body'>
     <LandingNavBar />
     <div className='landing-content'>
       <h1>Find Local Music</h1>
@@ -94,8 +94,10 @@ const LandingPage = () => (
       </p>
       <SearchForm />
     </div>
-    <img className='bgImage' alt='background' src={Concert} />
-  </body>
+    <div className='imgContainer'>
+      <img className='bgImage' alt='background' src={Concert} />
+    </div>
+  </div>
 )
 
 export default LandingPage
