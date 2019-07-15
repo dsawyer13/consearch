@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/consearch/static/css/main.5667faac.chunk.css",
+    "main.js": "/consearch/static/js/main.4fe273c9.chunk.js",
+    "main.js.map": "/consearch/static/js/main.4fe273c9.chunk.js.map",
+    "runtime~main.js": "/consearch/static/js/runtime~main.db7cf733.js",
+    "runtime~main.js.map": "/consearch/static/js/runtime~main.db7cf733.js.map",
+    "static/js/2.394b8fe6.chunk.js": "/consearch/static/js/2.394b8fe6.chunk.js",
+    "static/js/2.394b8fe6.chunk.js.map": "/consearch/static/js/2.394b8fe6.chunk.js.map",
+    "index.html": "/consearch/index.html",
+    "precache-manifest.e0922674c8464766c9445f4210dbffa0.js": "/consearch/precache-manifest.e0922674c8464766c9445f4210dbffa0.js",
+    "service-worker.js": "/consearch/service-worker.js",
+    "static/css/main.5667faac.chunk.css.map": "/consearch/static/css/main.5667faac.chunk.css.map",
+    "static/media/Concert.png": "/consearch/static/media/Concert.7c44ccca.png"
+  }
+}
