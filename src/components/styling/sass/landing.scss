@@ -43,11 +43,11 @@ html {
 
 .bgImage {
     overflow: hidden;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100vh;
+    position: fixed;
+    right: -1px;
+    top: -1px;;
+    bottom: -1px;
+    height: 102vh;
     z-index: -1;
 }
 
