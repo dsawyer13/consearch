@@ -16,6 +16,7 @@ function reducer(state, action) {
 
     switch (action.type) {
         case 'FETCH_RESULTS':
+            console.log(action.payload)
             return {...state, results: action.payload._embedded.events}
         case 'SET_PAGE':
             return {...state, page: 1}

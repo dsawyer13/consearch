@@ -3,8 +3,8 @@ import { StoreContext } from '../store'
 import { TM_URL, ITUNES_URL } from '../apiUrl'
 import { Link } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import './styling/css/results.css'
-import './styling/css/common.css'
+import './styling/sass/results.scss'
+import './styling/sass/common.scss'
 
 
 //nav bar with included search form
@@ -14,7 +14,7 @@ const ResultsBar = () => {
   const [state, dispatch] = useContext(StoreContext)
 
   const fetchResults = (city, distance) => {
-    fetch(`${TM_URL}&city=${city}&distance=${distance}`)
+    fetch(`${TM_URL}&city=${city}&distance=${distance}&apikey=5gBGodHTiMJ4Di2FPbmtdxK1SANVtsGo`, {mode: 'cors'})
       .then(res => res.json())
       .then(response => {
         dispatch({ type: 'FETCH_RESULTS', payload: response })

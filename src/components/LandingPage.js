@@ -3,8 +3,8 @@ import { StoreContext } from '../store'
 import { withRouter } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { TM_URL } from '../apiUrl'
-import './styling/css/landing.css'
-import './styling/css/common.css'
+import './styling/sass/landing.scss'
+import './styling/sass/common.scss'
 import Concert from './styling/Concert.png'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -27,10 +27,11 @@ export const SearchForm = withRouter(({ history }) => {
 
   // Fetch results from ticketMaster API and set it in context
   const fetchResults = (city, distance) => {
-    fetch(`${TM_URL}&city=${city}&distance=${distance}`)
+    fetch(`${TM_URL}&city=${city}&distance=${distance}&apikey=5gBGodHTiMJ4Di2FPbmtdxK1SANVtsGo`, {mode: 'cors'})
       .then(res => res.json())
       .then(response => {
         // condense these
+        // console.log(response)
         dispatch({ type: 'FETCH_RESULTS', payload: response })
         dispatch({ type: 'SET_CITY', payload: city })
         dispatch({ type: 'SET_DISTANCE', payload: distance })

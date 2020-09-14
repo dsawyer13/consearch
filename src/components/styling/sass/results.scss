@@ -1,4 +1,3 @@
-@import 'bourbon';
 @import url('https://fonts.googleapis.com/css?family=Lato:300|Poppins:400,600,700&display=swap');
 
 html {
@@ -110,10 +109,18 @@ nav {
         margin-bottom: 15px;
         color: #070D58;
         border: 3px solid #070D58;
+        &:hover, &:active {
+            color: white !important;
+            background: #070D58 !important;
+        }
     }
     .play-button {
         color: #FF8007;
         border: 3px solid #FF8007;
+        &:hover, &:active {
+            color: white !important;
+            background: #FF8007 !important;
+        }
     }
 }
 
